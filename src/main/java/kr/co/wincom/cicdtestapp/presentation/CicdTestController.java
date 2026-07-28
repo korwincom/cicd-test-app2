@@ -22,8 +22,8 @@ public class CicdTestController {
     public ResponseEntity<String> hello () {
 
         // 결과 출력
-        log.info("Hello World!! from cicd-test-app2");
-        return ResponseEntity.ok("Hello World!! from cicd-test-app2");
+        log.info("Hello World!! from cicd-test-app2~~");
+        return ResponseEntity.ok("Hello World!! from cicd-test-app2~~");
     }
 
 }
