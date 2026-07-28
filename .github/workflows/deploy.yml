@@ -5,8 +5,8 @@ on:
     branches: [ "main" ]
     types: [ opened, synchronize, reopened ] # PR 생성, 코드 추가 푸시, 다시 열림 시 작동
 env:
-  APP_NAME: cicd-test-app
-  DOCKER_IMAGE: legend03/cicd-test-app
+  APP_NAME: cicd-test-app2
+  DOCKER_IMAGE: legend03/cicd-test-app2
 
 jobs:
   build-and-push:

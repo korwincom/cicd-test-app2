@@ -6,9 +6,9 @@
     # 1. 젠킨스가 빌드해서 rsync로 보내준 최신 .jar 파일을 가지고 곧바로 도커 이미지 빌드 시작!
     - name: Build Docker Image
       docker_image:
-        name: cicd-test-app
+        name: cicd-test-app2
         build:
-          path: /home/wincomadmin/Project/cicd-test-app
+          path: /home/wincomadmin/Project/cicd-test-app2
           nocache: yes
         source: build
         force_source: yes
