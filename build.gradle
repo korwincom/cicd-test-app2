@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.0'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'kr.co.wincom'
+version = '0.0.1-SNAPSHOT'
+description = 'cicd-test-app2'
+
+java {
+    toolchain {
+        //languageVersion = JavaLanguageVersion.of(17)
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    implementation "io.springfox:springfox-swagger2:3.0.0"
+    implementation "io.springfox:springfox-swagger-ui:3.0.0"
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+//프로젝트 빌드 시 쓸데없는 plain JAR가 생성되어 도커 복사 단계를 교란하는 것을 막기 위해 설정 파일에 한 줄을 추가합니다.
+jar {
+    enabled = false
+}

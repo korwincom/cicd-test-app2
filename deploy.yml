@@ -1,0 +1,44 @@
+---
+- name: Spring Boot Docker Deploy Playbook
+  hosts: dev_server
+  tasks:
+
+    # 1. 젠킨스가 빌드해서 rsync로 보내준 최신 .jar 파일을 가지고 곧바로 도커 이미지 빌드 시작!
+    - name: Build Docker Image
+      docker_image:
+        name: cicd-test-app
+        build:
+          path: /home/wincomadmin/Project/cicd-test-app
+          nocache: yes
+        source: build
+        force_source: yes
+
+    # 2. 기존 1호기 컨테이너 삭제하기
+    - name: Stop and remove existing instance 1
+      docker_container:
+        name: cicd-test-app-instance-1
+        state: absent
+
+    # 3. 기존 2호기 컨테이너 삭제하기
+    - name: Stop and remove existing instance 2
+      docker_container:
+        name: cicd-test-app-instance-2
+        state: absent
+
+    # 4. 새 1호기 컨테이너 실행하기
+    - name: Start instance 1
+      docker_container:
+        name: cicd-test-app-instance-1
+        image: cicd-test-app
+        state: started
+        published_ports:
+          - "8091:8080"
+
+    # 5. 새 2호기 컨테이너 실행하기
+    - name: Start instance 2
+      docker_container:
+        name: cicd-test-app-instance-2
+        image: cicd-test-app
+        state: started
+        published_ports:
+          - "8092:8080"
