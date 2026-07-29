@@ -70,7 +70,7 @@ jobs:
         with:
           repository: 'korwincom/k8s-manifests'
           token: ${{ secrets.K8S_MANIFEST_TOKEN }}
-          path: 'k8s-manifests-repo2' # k8s-manifests 저장소를 임시로 폴더로 가져옵니다.
+          path: 'k8s-manifests-repo' # k8s-manifests 저장소를 임시로 폴더로 가져옵니다.
 
       - name: Update k8s deployment manifest & Push
         run: |
@@ -84,7 +84,7 @@ jobs:
           yq -i ".spec.template.spec.containers[0].image = \"${FULL_IMAGE}\"" ${MANIFEST_FILE}
           
           # k8s-manifests 저장소 폴더로 이동하여 Git 커밋 & 푸시 진행
-          cd k8s-manifests-repo2
+          cd k8s-manifests-repo
           
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]"
