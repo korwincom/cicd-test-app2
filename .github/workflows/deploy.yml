@@ -76,9 +76,9 @@ jobs:
         run: |
           FULL_IMAGE="${{ env.DOCKER_IMAGE }}:${{ steps.image_tag.outputs.IMAGE_TAG }}"
           
-          # 가져온 k8s-manifests 저장소 내부의 deployment-cicd-test-app2.yaml 경로 지정
-          # (만약 k8s-manifests 저장소의 최상위에 deployment-cicd-test-app2.yaml이 있다면 아래 경로를 "k8s-manifests-repo/deployment-cicd-test-app2.yaml" 로 바꿔주세요!)
-          MANIFEST_FILE="k8s-manifests-repo2/deployment-cicd-test-app2.yaml"
+          # 가져온 k8s-manifests 저장소 내부의 deployment.yaml 경로 지정
+          # (만약 k8s-manifests 저장소의 최상위에 deployment.yaml이 있다면 아래 경로를 "k8s-manifests-repo/deployment-cicd-test-app2.yaml" 로 바꿔주세요!)
+          MANIFEST_FILE="k8s-manifests-repo/cicd-test-app2/deployment.yaml"
           
           # yq 도구를 사용해 image 태그 수정
           yq -i ".spec.template.spec.containers[0].image = \"${FULL_IMAGE}\"" ${MANIFEST_FILE}
