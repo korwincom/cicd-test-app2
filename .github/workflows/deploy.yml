@@ -81,7 +81,8 @@ jobs:
           MANIFEST_FILE="k8s-manifests-repo/cicd-test-app2/deployment.yaml"
           
           # yq 도구를 사용해 image 태그 수정
-          yq -i ".spec.template.spec.containers[0].image = \"${FULL_IMAGE}\"" ${MANIFEST_FILE}
+          # yq -i ".spec.template.spec.containers[0].image = \"${FULL_IMAGE}\"" ${MANIFEST_FILE}
+          yq -i '(select(.kind == "Deployment") | .spec.template.spec.containers[0].image) = "'"${FULL_IMAGE}"'"' ${MANIFEST_FILE}
           
           # k8s-manifests 저장소 폴더로 이동하여 Git 커밋 & 푸시 진행
           cd k8s-manifests-repo
