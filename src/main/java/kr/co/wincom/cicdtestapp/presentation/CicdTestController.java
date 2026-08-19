@@ -23,7 +23,8 @@ public class CicdTestController {
 
         // 결과 출력
         log.info("hello world : cicd-test-app2");
-        return ResponseEntity.ok("hello world : cicd-test-app2");
+        log.info("2026-08-19 테스트");
+        return ResponseEntity.ok("hello world : cicd-test-app2 : 2026-08-19 테스트");
     }
 
 }
